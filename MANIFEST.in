@@ -1,0 +1,18 @@
+include MANIFEST.in
+include requirements.txt
+include *.json
+include *.md
+include *.py
+include *.txt
+recursive-include bonito_customizations *.css
+recursive-include bonito_customizations *.csv
+recursive-include bonito_customizations *.html
+recursive-include bonito_customizations *.ico
+recursive-include bonito_customizations *.js
+recursive-include bonito_customizations *.json
+recursive-include bonito_customizations *.md
+recursive-include bonito_customizations *.png
+recursive-include bonito_customizations *.py
+recursive-include bonito_customizations *.svg
+recursive-include bonito_customizations *.txt
+recursive-exclude bonito_customizations *.pyc
