@@ -17,4 +17,4 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [tool.bench.frappe-dependencies]
-frappe = ">1=6.0.0"
+frappe = ">16.0.0"
