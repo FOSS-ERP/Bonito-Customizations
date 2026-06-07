@@ -1,0 +1,362 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "autoname": "format:TDS-CHL-{YYYY}-{#####}",
+  "creation": "2026-04-08 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "section_challan_details",
+    "company",
+    "financial_year",
+    "column_break_1",
+    "assessment_year",
+    "quarter",
+    "section_period",
+    "period_from",
+    "column_break_period",
+    "period_to",
+    "section_tds_details",
+    "tds_section",
+    "column_break_2",
+    "tds_section_code",
+    "section_tds_accounts",
+    "tds_accounts_html",
+    "tds_account_head",
+    "section_challan_info",
+    "challan_number",
+    "bsr_code",
+    "column_break_3",
+    "date_of_deposit",
+    "bank_name",
+    "section_payment",
+    "payment_ref_type",
+    "payment_entry",
+    "column_break_payment",
+    "mode_of_payment",
+    "section_amounts",
+    "total_challan_amount",
+    "total_tds_amount",
+    "column_break_4",
+    "total_interest",
+    "total_late_fee",
+    "allocated_amount",
+    "unallocated_amount",
+    "section_entries",
+    "fetch_invoices",
+    "entries",
+    "section_status",
+    "status",
+    "column_break_status",
+    "remarks",
+    "amended_from"
+  ],
+  "fields": [
+    {
+      "fieldname": "section_challan_details",
+      "fieldtype": "Section Break",
+      "label": "Challan Details"
+    },
+    {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Company",
+      "options": "Company",
+      "reqd": 1
+    },
+    {
+      "fieldname": "financial_year",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Financial Year",
+      "options": "Fiscal Year",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "assessment_year",
+      "fieldtype": "Data",
+      "label": "Assessment Year",
+      "read_only": 1,
+      "description": "Auto-computed from Financial Year"
+    },
+    {
+      "fieldname": "quarter",
+      "fieldtype": "Select",
+      "label": "Quarter",
+      "options": "\nQ1 (Apr-Jun)\nQ2 (Jul-Sep)\nQ3 (Oct-Dec)\nQ4 (Jan-Mar)",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_period",
+      "fieldtype": "Section Break",
+      "label": "Period"
+    },
+    {
+      "fieldname": "period_from",
+      "fieldtype": "Date",
+      "label": "Period From",
+      "reqd": 1
+    },
+    {
+      "fieldname": "column_break_period",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "period_to",
+      "fieldtype": "Date",
+      "label": "Period To",
+      "reqd": 1
+    },
+    {
+      "fieldname": "section_tds_details",
+      "fieldtype": "Section Break",
+      "label": "TDS Section"
+    },
+    {
+      "fieldname": "tds_section",
+      "fieldtype": "Select",
+      "label": "TDS Section",
+      "options": "\n194C - Contractors\n194J - Professional/Technical Fees\n194I - Rent\n194A - Interest/Dividends\n194Q - Purchase of Goods\n194H - Commission/Brokerage\n192B - Salary\n194R - Benefits/Perquisites\n194D - Insurance Commission\n194DA - Life Insurance Policy",
+      "reqd": 1,
+      "in_list_view": 1,
+      "description": "TDS section under which challan is paid to the government. All withholding categories and accounts matching this section will be included."
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "tds_section_code",
+      "fieldtype": "Data",
+      "label": "Section Code",
+      "read_only": 1,
+      "description": "Auto-derived from TDS Section (e.g. 194C, 194J)"
+    },
+    {
+      "fieldname": "section_tds_accounts",
+      "fieldtype": "Section Break",
+      "label": "TDS Accounts",
+      "description": "All matching TDS accounts for the selected section. These are auto-populated and used for fetching vouchers."
+    },
+    {
+      "fieldname": "tds_accounts_html",
+      "fieldtype": "HTML",
+      "label": "Matched TDS Accounts",
+      "description": "Shows all withholding categories and GL accounts that will be searched"
+    },
+    {
+      "fieldname": "tds_account_head",
+      "fieldtype": "Small Text",
+      "label": "TDS Account Heads (JSON)",
+      "hidden": 1,
+      "description": "JSON list of all TDS account heads to search. Auto-populated from TDS Section."
+    },
+    {
+      "fieldname": "section_challan_info",
+      "fieldtype": "Section Break",
+      "label": "Government Challan Info"
+    },
+    {
+      "fieldname": "challan_number",
+      "fieldtype": "Data",
+      "label": "Challan Number",
+      "unique": 1,
+      "in_list_view": 1,
+      "description": "Challan serial number from bank receipt"
+    },
+    {
+      "fieldname": "bsr_code",
+      "fieldtype": "Data",
+      "label": "BSR Code",
+      "description": "7-digit BSR code of the bank branch"
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "date_of_deposit",
+      "fieldtype": "Date",
+      "label": "Date of Deposit",
+      "in_list_view": 1,
+      "description": "Date TDS was deposited to government"
+    },
+    {
+      "fieldname": "bank_name",
+      "fieldtype": "Data",
+      "label": "Bank Name"
+    },
+    {
+      "fieldname": "section_payment",
+      "fieldtype": "Section Break",
+      "label": "Payment Reference"
+    },
+    {
+      "fieldname": "payment_ref_type",
+      "fieldtype": "Select",
+      "label": "Payment Reference Type",
+      "options": "\nPayment Entry\nJournal Entry",
+      "default": "Payment Entry"
+    },
+    {
+      "fieldname": "payment_entry",
+      "fieldtype": "Dynamic Link",
+      "label": "Payment Reference",
+      "options": "payment_ref_type",
+      "description": "Payment Entry or Journal Entry used to pay TDS to government"
+    },
+    {
+      "fieldname": "column_break_payment",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "mode_of_payment",
+      "fieldtype": "Link",
+      "label": "Mode of Payment",
+      "options": "Mode of Payment"
+    },
+    {
+      "fieldname": "section_amounts",
+      "fieldtype": "Section Break",
+      "label": "Amounts"
+    },
+    {
+      "fieldname": "total_challan_amount",
+      "fieldtype": "Currency",
+      "label": "Total Challan Amount",
+      "reqd": 1,
+      "description": "Actual amount deposited to government (TDS + interest + late fee)"
+    },
+    {
+      "fieldname": "total_tds_amount",
+      "fieldtype": "Currency",
+      "label": "Total TDS from Vouchers",
+      "read_only": 1,
+      "description": "Sum of TDS amounts from all linked vouchers (full amounts before allocation)"
+    },
+    {
+      "fieldname": "column_break_4",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "total_interest",
+      "fieldtype": "Currency",
+      "label": "Interest (if any)",
+      "default": "0"
+    },
+    {
+      "fieldname": "total_late_fee",
+      "fieldtype": "Currency",
+      "label": "Late Fee (if any)",
+      "default": "0"
+    },
+    {
+      "fieldname": "allocated_amount",
+      "fieldtype": "Currency",
+      "label": "Total Allocated",
+      "read_only": 1,
+      "description": "Sum of allocated amounts from entries (should match challan amount minus interest/fee)"
+    },
+    {
+      "fieldname": "unallocated_amount",
+      "fieldtype": "Currency",
+      "label": "Unallocated Amount",
+      "read_only": 1,
+      "description": "Challan Amount - Interest - Late Fee - Allocated"
+    },
+    {
+      "fieldname": "section_entries",
+      "fieldtype": "Section Break",
+      "label": "Linked Vouchers"
+    },
+    {
+      "fieldname": "fetch_invoices",
+      "fieldtype": "Button",
+      "label": "Fetch Vouchers",
+      "depends_on": "eval:doc.docstatus==0"
+    },
+    {
+      "fieldname": "entries",
+      "fieldtype": "Table",
+      "label": "TDS Entries",
+      "options": "TDS Challan Entry"
+    },
+    {
+      "fieldname": "section_status",
+      "fieldtype": "Section Break",
+      "label": "Status"
+    },
+    {
+      "fieldname": "status",
+      "fieldtype": "Select",
+      "label": "Status",
+      "options": "Draft\nReconciled\nPartially Reconciled\nCancelled",
+      "default": "Draft",
+      "in_list_view": 1,
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_status",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "remarks",
+      "fieldtype": "Small Text",
+      "label": "Remarks"
+    },
+    {
+      "fieldname": "amended_from",
+      "fieldtype": "Link",
+      "label": "Amended From",
+      "no_copy": 1,
+      "options": "TDS Challan",
+      "print_hide": 1,
+      "read_only": 1
+    }
+  ],
+  "is_submittable": 1,
+  "links": [],
+  "modified": "2026-04-18 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Bonito Customizations",
+  "name": "TDS Challan",
+  "owner": "Administrator",
+  "permissions": [
+    {
+      "amend": 1,
+      "cancel": 1,
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Accounts Manager",
+      "share": 1,
+      "submit": 1,
+      "write": 1
+    },
+    {
+      "create": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "Accounts User",
+      "share": 1,
+      "write": 1
+    }
+  ],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "title_field": "challan_number",
+  "track_changes": 1
+}
+

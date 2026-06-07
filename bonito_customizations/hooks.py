@@ -173,3 +173,25 @@ user_data_fields = [
 # 	"bonito_customizations.auth.validate"
 # ]
 
+doc_events = {
+    "Bulk Purchase Invoice Creation": {
+        "before_save": "bonito_customizations.bulk_pi_native.before_save",
+        "on_submit": "bonito_customizations.bulk_pi_native.on_submit",
+    },
+    "Bulk Sales Invoice Creation": {
+        "before_save": "bonito_customizations.bulk_si_native.before_save",
+    },
+    "Bulk Payment Entry Creation": {
+        "before_save": "bonito_customizations.bulk_payment_entry_native.before_save",
+    },
+    "Bulk Journal Entry Creation": {
+        "before_save": "bonito_customizations.bulk_journal_entry_native.before_save",
+    },
+    "Purchase Invoice": {
+        "before_cancel": "bonito_customizations.bonito_customizations.doctype.tds_challan.tds_challan_hooks.prevent_cancel_if_linked_to_challan",
+        "before_save": "bonito_customizations.overrides.purchase_invoice_return.before_save_populate_return_taxes"
+    },
+    "Journal Entry": {
+        "before_cancel": "bonito_customizations.bonito_customizations.doctype.tds_challan.tds_challan_hooks.prevent_cancel_if_linked_to_challan"
+    }
+}

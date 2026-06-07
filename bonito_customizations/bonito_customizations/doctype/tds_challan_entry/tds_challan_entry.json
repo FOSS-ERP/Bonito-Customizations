@@ -1,0 +1,215 @@
+{
+  "actions": [],
+  "allow_rename": 0,
+  "creation": "2026-04-08 12:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "voucher_type",
+    "voucher_no",
+    "supplier",
+    "supplier_name",
+    "supplier_pan",
+    "column_break_1",
+    "posting_date",
+    "bill_no",
+    "bill_date",
+    "section_amounts",
+    "tds_amount",
+    "allocated_amount",
+    "column_break_2",
+    "tax_withholding_category",
+    "tds_account",
+    "section_invoice_details",
+    "invoice_net_total",
+    "invoice_grand_total",
+    "column_break_inv",
+    "purchase_order",
+    "purchase_receipt",
+    "section_reference",
+    "project",
+    "column_break_3",
+    "cost_center",
+    "je_remark"
+  ],
+  "fields": [
+    {
+      "fieldname": "voucher_type",
+      "fieldtype": "Select",
+      "in_list_view": 1,
+      "label": "Voucher Type",
+      "options": "Purchase Invoice\nJournal Entry",
+      "default": "Purchase Invoice",
+      "reqd": 1
+    },
+    {
+      "fieldname": "voucher_no",
+      "fieldtype": "Dynamic Link",
+      "in_list_view": 1,
+      "label": "Voucher No",
+      "options": "voucher_type",
+      "reqd": 1
+    },
+    {
+      "fieldname": "supplier",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Supplier",
+      "options": "Supplier",
+      "read_only": 1
+    },
+    {
+      "fieldname": "supplier_name",
+      "fieldtype": "Data",
+      "label": "Supplier Name",
+      "read_only": 1
+    },
+    {
+      "fieldname": "supplier_pan",
+      "fieldtype": "Data",
+      "label": "Supplier PAN/TAN",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_1",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "posting_date",
+      "fieldtype": "Date",
+      "in_list_view": 1,
+      "label": "Posting Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "bill_no",
+      "fieldtype": "Data",
+      "label": "Supplier Invoice No",
+      "read_only": 1
+    },
+    {
+      "fieldname": "bill_date",
+      "fieldtype": "Date",
+      "label": "Supplier Invoice Date",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_amounts",
+      "fieldtype": "Section Break",
+      "label": "Amounts"
+    },
+    {
+      "fieldname": "tds_amount",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "TDS Amount",
+      "reqd": 1,
+      "description": "Full TDS deducted on this voucher"
+    },
+    {
+      "fieldname": "allocated_amount",
+      "fieldtype": "Currency",
+      "in_list_view": 1,
+      "label": "Allocated Amount",
+      "reqd": 1,
+      "description": "Amount allocated against this challan (can be less than TDS amount for partial allocation)"
+    },
+    {
+      "fieldname": "column_break_2",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "tax_withholding_category",
+      "fieldtype": "Link",
+      "label": "Tax Withholding Category",
+      "options": "Tax Withholding Category",
+      "read_only": 1
+    },
+    {
+      "fieldname": "tds_account",
+      "fieldtype": "Link",
+      "label": "TDS Account",
+      "options": "Account",
+      "read_only": 1,
+      "description": "GL account where TDS was credited for this voucher"
+    },
+    {
+      "fieldname": "section_invoice_details",
+      "fieldtype": "Section Break",
+      "label": "Invoice Details",
+      "collapsible": 1,
+      "depends_on": "eval:doc.voucher_type=='Purchase Invoice'"
+    },
+    {
+      "fieldname": "invoice_net_total",
+      "fieldtype": "Currency",
+      "label": "Taxable Amount (Net Total)",
+      "read_only": 1
+    },
+    {
+      "fieldname": "invoice_grand_total",
+      "fieldtype": "Currency",
+      "label": "Invoice Grand Total",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_inv",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "purchase_order",
+      "fieldtype": "Data",
+      "label": "Purchase Order",
+      "read_only": 1
+    },
+    {
+      "fieldname": "purchase_receipt",
+      "fieldtype": "Data",
+      "label": "Purchase Receipt",
+      "read_only": 1
+    },
+    {
+      "fieldname": "section_reference",
+      "fieldtype": "Section Break",
+      "label": "References",
+      "collapsible": 1
+    },
+    {
+      "fieldname": "project",
+      "fieldtype": "Data",
+      "label": "Project",
+      "read_only": 1
+    },
+    {
+      "fieldname": "column_break_3",
+      "fieldtype": "Column Break"
+    },
+    {
+      "fieldname": "cost_center",
+      "fieldtype": "Data",
+      "label": "Cost Center",
+      "read_only": 1
+    },
+    {
+      "fieldname": "je_remark",
+      "fieldtype": "Small Text",
+      "label": "JE Remark",
+      "read_only": 1,
+      "depends_on": "eval:doc.voucher_type=='Journal Entry'",
+      "description": "Remark from the Journal Entry (for context)"
+    }
+  ],
+  "index_web_pages_for_search": 0,
+  "istable": 1,
+  "links": [],
+  "modified": "2026-04-18 12:00:00.000000",
+  "modified_by": "Administrator",
+  "module": "Bonito Customizations",
+  "name": "TDS Challan Entry",
+  "owner": "Administrator",
+  "permissions": [],
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 0
+}
+
