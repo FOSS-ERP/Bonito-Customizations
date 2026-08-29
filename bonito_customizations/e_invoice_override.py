@@ -1,3 +1,5 @@
+import frappe
+
 from india_compliance.gst_india.utils.e_invoice import EInvoiceData
 
 
@@ -13,15 +15,20 @@ def apply_e_invoice_override():
         item = next(
             (
                 row
-                for row in self._items
+                for row in self.doc.items
                 if row.idx == item_details.item_no
             ),
             None,
         )
 
-        if item:
-            description = getattr(item, "description", None)
-            custom_sac = getattr(item, "custom_sac", None)
+        if not item:
+            return data
+
+        description = getattr(item, "description", None)
+        custom_sac = getattr(item, "custom_sac", None)
+
+        if description:
+            description = frappe.utils.strip_html(description).strip()
 
             if description:
                 data["PrdDesc"] = self.sanitize_value(
@@ -30,8 +37,8 @@ def apply_e_invoice_override():
                     max_length=300,
                 )
 
-            if custom_sac:
-                data["HsnCd"] = custom_sac
+        if custom_sac:
+            data["HsnCd"] = custom_sac
 
         return data
 
