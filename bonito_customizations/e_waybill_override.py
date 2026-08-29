@@ -20,17 +20,16 @@ def apply_e_waybill_override():
         )
 
         if item:
-            # Use Description instead of Item Name
-            data["productDesc"] = self.sanitize_value(
-                item.description,
-                regex=3,
-                max_length=300,
-            )
+            description = getattr(item, "description", None)
+
+            if description:
+                data["productDesc"] = self.sanitize_value(
+                    description,
+                    regex=3,
+                    max_length=300,
+                )
 
         return data
 
     EWaybillData.get_item_data = get_item_data
     EWaybillData._bonito_e_waybill_patched = True
-
-
-apply_e_waybill_override()

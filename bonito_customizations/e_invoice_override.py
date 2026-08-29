@@ -10,7 +10,6 @@ def apply_e_invoice_override():
     def get_item_data(self, item_details):
         data = original_get_item_data(self, item_details)
 
-        # Find the original Sales Invoice Item row.
         item = next(
             (
                 row
@@ -21,15 +20,18 @@ def apply_e_invoice_override():
         )
 
         if item:
-            # Use item_description for e-Invoice description.
-            data["PrdDesc"] = self.sanitize_value(
-                item.description,
-                regex=3,
-                max_length=300,
-            )
+            description = getattr(item, "description", None)
+            custom_sac = getattr(item, "custom_sac", None)
 
-            # Use custom_sac for e-Invoice HSN/SAC.
-            data["HsnCd"] = item.custom_sac
+            if description:
+                data["PrdDesc"] = self.sanitize_value(
+                    description,
+                    regex=3,
+                    max_length=300,
+                )
+
+            if custom_sac:
+                data["HsnCd"] = custom_sac
 
         return data
 
