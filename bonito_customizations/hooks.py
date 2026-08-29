@@ -129,6 +129,8 @@ app_license = "MIT"
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "bonito_customizations.event.get_events"
 # }
+
+
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
@@ -188,3 +190,10 @@ doc_events = {
         "before_save": "bonito_customizations.bulk_journal_entry_native.before_save",
     }
 }
+
+from bonito_customizations.e_invoice_override import apply_e_invoice_override
+from bonito_customizations.e_waybill_override import apply_e_waybill_override
+
+apply_e_invoice_override()
+apply_e_waybill_override()
+
