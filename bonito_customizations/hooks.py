@@ -188,3 +188,10 @@ doc_events = {
         "before_save": "bonito_customizations.bulk_journal_entry_native.before_save",
     }
 }
+
+from bonito_customizations.e_invoice_override import apply_e_invoice_override
+from bonito_customizations.e_waybill_override import apply_e_waybill_override
+
+apply_e_invoice_override()
+apply_e_waybill_override()
+
