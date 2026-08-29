@@ -1,7 +1,5 @@
 __version__ = "0.0.1"
 
-import   and  as original
-
 from bonito_customizations.e_invoice_override import apply_e_invoice_override
 from bonito_customizations.e_waybill_override import apply_e_waybill_override
 

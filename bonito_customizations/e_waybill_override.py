@@ -1,3 +1,5 @@
+import frappe
+
 from india_compliance.gst_india.utils.e_waybill import EWaybillData
 
 
@@ -13,14 +15,19 @@ def apply_e_waybill_override():
         item = next(
             (
                 row
-                for row in self._items
+                for row in self.doc.items
                 if row.idx == item_details.item_no
             ),
             None,
         )
 
-        if item:
-            description = getattr(item, "description", None)
+        if not item:
+            return data
+
+        description = getattr(item, "description", None)
+
+        if description:
+            description = frappe.utils.strip_html(description).strip()
 
             if description:
                 data["productDesc"] = self.sanitize_value(
