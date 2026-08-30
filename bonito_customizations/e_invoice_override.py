@@ -1,5 +1,6 @@
 import frappe
 
+from india_compliance.gst_india.constants import SERVICE_HSN_PREFIX
 from india_compliance.gst_india.utils.e_invoice import EInvoiceData
 
 
@@ -41,6 +42,9 @@ def apply_e_invoice_override():
             custom_sac_clean = str(custom_sac).strip()
             if custom_sac_clean.isdigit() and len(custom_sac_clean) in (4, 6, 8):
                 data["HsnCd"] = custom_sac_clean
+                data["IsServc"] = (
+                    "Y" if custom_sac_clean.startswith(SERVICE_HSN_PREFIX) else "N"
+                )
 
         return data
 
