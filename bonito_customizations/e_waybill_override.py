@@ -30,7 +30,7 @@ def apply_e_waybill_override():
             description = frappe.utils.strip_html(description).strip()
 
             if description:
-                data["PrdDesc"] = self.sanitize_value(
+                data["productDesc"] = self.sanitize_value(
                     description,
                     regex=3,
                     max_length=300,
