@@ -38,7 +38,9 @@ def apply_e_invoice_override():
                 )
 
         if custom_sac:
-            data["HsnCd"] = custom_sac
+            custom_sac_clean = str(custom_sac).strip()
+            if custom_sac_clean.isdigit() and len(custom_sac_clean) in (4, 6, 8):
+                data["HsnCd"] = custom_sac_clean
 
         return data
 
