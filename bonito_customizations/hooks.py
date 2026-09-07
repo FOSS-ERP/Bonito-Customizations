@@ -189,4 +189,9 @@ doc_events = {
     }
 }
 
+doc_events = {
+    "Sales Invoice": {
+        "validate": "bonito_customizations.sales_invoice_override.set_fallback_eway_bill_distance",
+    }
+}
 
