@@ -49,4 +49,4 @@ def apply_e_invoice_override():
         return data
 
     EInvoiceData.get_item_data = get_item_data
-    EInvoiceData._bonito_e_invoice_patched = True. heree
+    EInvoiceData._bonito_e_invoice_patched = True
