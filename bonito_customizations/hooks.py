@@ -187,11 +187,4 @@ doc_events = {
     "Bulk Journal Entry Creation": {
         "before_save": "bonito_customizations.bulk_journal_entry_native.before_save",
     }
-}
-
-doc_events = {
-    "Sales Invoice": {
-        "validate": "bonito_customizations.sales_invoice_override.set_fallback_eway_bill_distance",
-    }
-}
 
