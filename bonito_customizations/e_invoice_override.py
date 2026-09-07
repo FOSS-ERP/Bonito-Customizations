@@ -36,13 +36,9 @@ def apply_e_invoice_override():
                     description,
                     regex=3,
                     max_length=300,
-                )
+             )
 
-        
-        existing_hsn = str(data.get("HsnCd") or "").strip()
-        is_existing_hsn_goods = bool(existing_hsn) and not existing_hsn.startswith(SERVICE_HSN_PREFIX)
-
-        if custom_sac and not is_existing_hsn_goods:
+        if custom_sac:
             custom_sac_clean = str(custom_sac).strip()
             if custom_sac_clean.isdigit() and len(custom_sac_clean) in (4, 6, 8):
                 data["HsnCd"] = custom_sac_clean
@@ -53,4 +49,4 @@ def apply_e_invoice_override():
         return data
 
     EInvoiceData.get_item_data = get_item_data
-    EInvoiceData._bonito_e_invoice_patched = True
+    EInvoiceData._bonito_e_invoice_patched = True. heree
