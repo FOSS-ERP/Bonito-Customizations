@@ -41,18 +41,22 @@ def apply_e_waybill_override():
     EWaybillData.get_item_data = get_item_data
 
     # ---------------------------------------------------------
-    # Override Party Address Details
+    # Override toTrdName
     # ---------------------------------------------------------
-    original_set_party_address_details = EWaybillData.set_party_address_details
+    original_get_data = EWaybillData.get_data
 
-    def set_party_address_details(self):
-        original_set_party_address_details(self)
+    def get_data(self, *args, **kwargs):
+        data = original_get_data(self, *args, **kwargs)
 
-        custom_customer_name = self.doc.get("custom_customer_name_without_pid")
+        custom_customer_name = self.doc.get(
+            "custom_customer_name_without_pid"
+        )
 
         if custom_customer_name:
-            self.bill_to.legal_name = custom_customer_name
+            data["toTrdName"] = custom_customer_name
 
-    EWaybillData.set_party_address_details = set_party_address_details
+        return data
+
+    EWaybillData.get_data = get_data
 
     EWaybillData._bonito_e_waybill_patched = True
