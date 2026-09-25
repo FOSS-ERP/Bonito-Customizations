@@ -39,4 +39,20 @@ def apply_e_waybill_override():
         return data
 
     EWaybillData.get_item_data = get_item_data
+
+    # ---------------------------------------------------------
+    # Override Party Address Details
+    # ---------------------------------------------------------
+    original_set_party_address_details = EWaybillData.set_party_address_details
+
+    def set_party_address_details(self):
+        original_set_party_address_details(self)
+
+        custom_customer_name = self.doc.get("custom_customer_name_without_pid")
+
+        if custom_customer_name:
+            self.bill_to.legal_name = custom_customer_name
+
+    EWaybillData.set_party_address_details = set_party_address_details
+
     EWaybillData._bonito_e_waybill_patched = True
