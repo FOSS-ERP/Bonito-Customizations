@@ -45,7 +45,7 @@ def apply_e_waybill_override():
         # Always regenerate e-waybill from fresh goods data,
         # never via the IRN-linked shortcut
         kwargs["with_irn"] = False
-        data = original_get_data(self, *args, **kwargs)₹₹
+        data = original_get_data(self, *args, **kwargs)
 
         # Override toTrdName
         custom_customer_name = self.doc.get("custom_customer_name_without_pid")
