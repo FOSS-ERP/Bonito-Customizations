@@ -47,10 +47,12 @@ def apply_e_waybill_override():
         kwargs["with_irn"] = False
         data = original_get_data(self, *args, **kwargs)
 
-        # Override toTrdName
+        # Use the customer name without PID in the e-waybill
         custom_customer_name = self.doc.get("custom_customer_name_without_pid")
         if custom_customer_name:
-            data["toTrdName"] = custom_customer_name
+            data["toTrdName"] = custom_customer_name.strip()
+
+        return data
 
 
     def patched_generate_e_waybill(doc, throw=True, force=False):
